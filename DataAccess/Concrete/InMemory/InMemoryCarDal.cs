@@ -50,7 +50,7 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Car> GetCarsByColorId(Expression<Func<Car, bool>> filter)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public void Update(Car car)
