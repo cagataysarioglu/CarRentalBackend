@@ -45,17 +45,23 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Car> GetCarsByBrandId(Expression<Func<Car, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _cars.Where(filter.Compile()).ToList();
         }
 
         public List<Car> GetCarsByColorId(Expression<Func<Car, bool>> filter)
         {
-            return null;
+            return _cars.Where(filter.Compile()).ToList();
         }
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
+            carToUpdate.BrandId = car.BrandId;
+            carToUpdate.ColorId = car.ColorId;
+            carToUpdate.Name = car.Name;
+            carToUpdate.ModelYear = car.ModelYear;
+            carToUpdate.DailyPrice = car.DailyPrice;
+            carToUpdate.Description = car.Description;
         }
     }
 }

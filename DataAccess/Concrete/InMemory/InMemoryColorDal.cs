@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
@@ -9,39 +10,43 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryColorDal : IColorDal
     {
-        public void Add(Color entity)
+        private List<Color> _colors;
+        public void Add(Color color)
         {
-            throw new NotImplementedException();
+            _colors.Add(color);
         }
 
-        public void Delete(Color entity)
+        public void Delete(Color color)
         {
-            throw new NotImplementedException();
+            Color colorToDelete = null;
+            colorToDelete = _colors.SingleOrDefault(c => c.Id == color.Id);
+            _colors.Remove(colorToDelete);
         }
 
         public Color Get(Expression<Func<Color, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _colors.SingleOrDefault(filter.Compile());
         }
 
         public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return filter == null ? _colors.ToList() : _colors.Where(filter.Compile()).ToList();
         }
 
         public List<Color> GetCarsByBrandId(Expression<Func<Color, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _colors.Where(filter.Compile()).ToList();
         }
 
         public List<Color> GetCarsByColorId(Expression<Func<Color, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _colors.Where(filter.Compile()).ToList();
         }
 
-        public void Update(Color entity)
+        public void Update(Color color)
         {
-            throw new NotImplementedException();
+            Color colorToUpdate = _colors.SingleOrDefault(c => c.Id == color.Id);
+            colorToUpdate.Name = color.Name;
         }
     }
 }
