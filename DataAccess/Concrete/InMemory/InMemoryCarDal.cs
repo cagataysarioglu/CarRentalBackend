@@ -33,24 +33,24 @@ namespace DataAccess.Concrete.InMemory
             _cars.Remove(carToDelete);
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Car Get(Func<Car, bool> filter)
         {
-            return _cars.SingleOrDefault(filter.Compile());
+            return _cars.SingleOrDefault(filter);
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        public List<Car> GetAll(Func<Car, bool> filter = null)
         {
-            return filter == null ? _cars.ToList() : _cars.Where(filter.Compile()).ToList();
+            return filter == null ? _cars.ToList() : _cars.Where(filter).ToList();
         }
 
-        public List<Car> GetCarsByBrandId(Expression<Func<Car, bool>> filter)
+        public List<Car> GetCarsByBrandId(Func<Car, bool> filter)
         {
-            return _cars.Where(filter.Compile()).ToList();
+            return _cars.Where(filter).ToList();
         }
 
-        public List<Car> GetCarsByColorId(Expression<Func<Car, bool>> filter)
+        public List<Car> GetCarsByColorId(Func<Car, bool> filter)
         {
-            return _cars.Where(filter.Compile()).ToList();
+            return _cars.Where(filter).ToList();
         }
 
         public void Update(Car car)

@@ -23,24 +23,24 @@ namespace DataAccess.Concrete.InMemory
             _colors.Remove(colorToDelete);
         }
 
-        public Color Get(Expression<Func<Color, bool>> filter)
+        public Color Get(Func<Color, bool> filter)
         {
-            return _colors.SingleOrDefault(filter.Compile());
+            return _colors.SingleOrDefault(filter);
         }
 
-        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
+        public List<Color> GetAll(Func<Color, bool> filter = null)
         {
-            return filter == null ? _colors.ToList() : _colors.Where(filter.Compile()).ToList();
+            return filter == null ? _colors.ToList() : _colors.Where(filter).ToList();
         }
 
-        public List<Color> GetCarsByBrandId(Expression<Func<Color, bool>> filter)
+        public List<Color> GetCarsByBrandId(Func<Color, bool> filter)
         {
-            return _colors.Where(filter.Compile()).ToList();
+            return _colors.Where(filter).ToList();
         }
 
-        public List<Color> GetCarsByColorId(Expression<Func<Color, bool>> filter)
+        public List<Color> GetCarsByColorId(Func<Color, bool> filter)
         {
-            return _colors.Where(filter.Compile()).ToList();
+            return _colors.Where(filter).ToList();
         }
 
         public void Update(Color color)
