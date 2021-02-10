@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Business.Abstract;
 using DataAccess.Abstract;
@@ -25,8 +24,10 @@ namespace Business.Concrete
             }
             else
             {
-                string warning = "Girilecek olan araba adı en az 3 karakter olmalı.";
-                Console.WriteLine(warning);
+                string warning1 = "Girilecek olan araba adı en az 3 karakter olmalı.";
+                string warning2 = "Girilecek olan araba günlük ücreti sıfırdan büyük olmalı.";
+                Console.WriteLine(warning1);
+                Console.WriteLine(warning2);
             }
         }
 
