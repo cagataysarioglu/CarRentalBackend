@@ -45,19 +45,6 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public List<TEntity> GetCarsByBrandId(Func<TEntity, bool> filter)
-        {
-            using (TContext context = new TContext())
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public List<TEntity> GetCarsByColorId(Func<TEntity, bool> filter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())

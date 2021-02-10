@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using DataAccess.Abstract;
@@ -21,7 +22,7 @@ namespace Business.Concrete
 
         public List<Brand> GetById(int brandId)
         {
-            return _brandDal.GetCarsByBrandId(c => c.Id == brandId);
+            return _brandDal.GetAll(c => c.Id == brandId);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Business.Concrete
 
         List<Color> IColorService.GetById(int colorId)
         {
-            return _colorDal.GetCarsByColorId(c => c.Id == colorId);
+            return _colorDal.GetAll(c => c.Id == colorId);
         }
     }
 }

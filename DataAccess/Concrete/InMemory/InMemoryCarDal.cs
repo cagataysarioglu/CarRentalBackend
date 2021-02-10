@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -41,6 +42,11 @@ namespace DataAccess.Concrete.InMemory
         public List<Car> GetAll(Func<Car, bool> filter = null)
         {
             return filter == null ? _cars.ToList() : _cars.Where(filter).ToList();
+        }
+
+        public List<CarDetailDto> GetCarDetails(Func<Car, bool> filter = null)
+        {
+            return null;
         }
 
         public List<Car> GetCarsByBrandId(Func<Car, bool> filter)
