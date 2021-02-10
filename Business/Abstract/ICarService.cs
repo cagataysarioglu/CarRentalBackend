@@ -13,7 +13,7 @@ namespace Business.Abstract
         List<Car> GetByDailyPrice(decimal min, decimal max);
         List<Car> GetCarsByBrandId(int brandId);
         List<Car> GetCarsByColorId(int colorId);
-        List<CarDetailDto> GetProductDetails();
+        List<CarDetailDto> GetCarDetails(int id);
         void Update(Car car);
         void Delete(Car car);
         void Add(Car car);

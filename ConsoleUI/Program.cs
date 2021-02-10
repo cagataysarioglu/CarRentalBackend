@@ -33,11 +33,9 @@ namespace ConsoleUI
 
             Console.WriteLine("***********************");
 
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-
-            foreach (var color in colorManager.GetAll())
+            foreach (var detail in carManager.GetCarDetails(2))
             {
-                Console.WriteLine(color.Name);
+                Console.WriteLine("İlgili aracın adı {0} ve günlük ücreti {1}", detail.Name, detail.DailyPrice);
             }
 
             Console.ReadKey();
