@@ -9,8 +9,9 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-            Console.WriteLine(carManager.GetById(3));
+            CarManager carManager = new CarManager(new EfCarDal());
+            Console.WriteLine(carManager.GetCarsByBrandId(3));
+
             Console.ReadKey();
         }
     }
