@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
@@ -23,6 +24,21 @@ namespace ConsoleUI
                 Console.WriteLine("Renge göre araba adı: {0}", car.Name);
             }
 
+            Console.WriteLine("***********************");
+
+            foreach (var car in carManager.GetAll())
+            {
+                Console.WriteLine("Araba: {0} / Model yılı: {1} / Günlük ücreti: {2}", car.Name, car.ModelYear, car.DailyPrice);
+            }
+
+            Console.WriteLine("***********************");
+
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine(color.Name);
+            }
 
             Console.ReadKey();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Business.Abstract;
 using DataAccess.Abstract;
@@ -15,6 +16,25 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+
+        public void Add(Car car)
+        {
+            if (car.Name.Length > 2 && car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                string warning = "Girilecek olan araba adı en az 3 karakter olmalı.";
+                Console.WriteLine(warning);
+            }
+        }
+
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
@@ -42,6 +62,11 @@ namespace Business.Concrete
         public List<CarDetailDto> GetProductDetails()
         {
             return _carDal.GetCarDetails();
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }
