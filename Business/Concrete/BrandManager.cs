@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -15,14 +18,23 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-        public List<Brand> GetAll()
+
+        IDataResult<List<Brand>> IBrandService.GetAll()
         {
-            return _brandDal.GetAll();
+            if (DateTime.Now.Hour > 22 && DateTime.Now.Hour < 23)
+            {
+                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
+            }
+            return new DataResult<List<Brand>>(_brandDal.GetAll(), true, Messages.Listed);_brandDal.GetAll();
         }
 
-        public List<Brand> GetById(int brandId)
+        IDataResult<List<Brand>> IBrandService.GetById(int brandId)
         {
-            return _brandDal.GetAll(c => c.Id == brandId);
+            if (DateTime.Now.Hour > 22 && DateTime.Now.Hour < 23)
+            {
+                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
+            }
+            return new DataResult<List<Brand>>(_brandDal.GetAll(c => c.Id == brandId), true, Messages.Listed);_brandDal.GetAll(c => c.Id == brandId);
         }
     }
 }

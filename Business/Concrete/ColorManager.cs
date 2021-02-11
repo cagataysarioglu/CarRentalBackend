@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -14,14 +17,23 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-        public List<Color> GetAll()
+
+        IDataResult<List<Color>> IColorService.GetAll()
         {
-            return _colorDal.GetAll();
+            if (DateTime.Now.Hour > 22 && DateTime.Now.Hour < 23)
+            {
+                return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
+            }
+            return new DataResult<List<Color>>(_colorDal.GetAll(), true, Messages.Listed);_colorDal.GetAll();
         }
 
-        List<Color> IColorService.GetById(int colorId)
+        IDataResult<List<Color>> IColorService.GetById(int colorId)
         {
-            return _colorDal.GetAll(c => c.Id == colorId);
+            if (DateTime.Now.Hour > 22 && DateTime.Now.Hour < 23)
+            {
+                return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
+            }
+            return new DataResult<List<Color>>(_colorDal.GetAll(c => c.Id == colorId), true, Messages.Listed);_colorDal.GetAll(c => c.Id == colorId);
         }
     }
 }
