@@ -51,7 +51,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Car>>(_carDal.GetAll(), true, Messages.Listed);_carDal.GetAll();
+            return new DataResult<List<Car>>(_carDal.GetAll(), true, Messages.Listed);
         }
 
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
@@ -60,7 +60,8 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice <= max && c.DailyPrice >= min), true, Messages.Listed);_carDal.GetAll(c => c.DailyPrice <= max && c.DailyPrice >= min);        }
+            return new DataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice <= max && c.DailyPrice >= min), true, Messages.Listed);
+        }
 
         public IDataResult<Car> GetById(int id)
         {
@@ -77,7 +78,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Car>>(_carDal.GetCarsByBrandId(c => c.BrandId == brandId), true, Messages.Listed);_carDal.GetCarsByBrandId(c => c.BrandId == brandId);
+            return new DataResult<List<Car>>(_carDal.GetCarsByBrandId(c => c.BrandId == brandId), true, Messages.Listed);
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
@@ -86,7 +87,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Car>>(_carDal.GetCarsByColorId(c => c.ColorId == colorId), true, Messages.Listed);_carDal.GetCarsByColorId(c => c.ColorId == colorId);
+            return new DataResult<List<Car>>(_carDal.GetCarsByColorId(c => c.ColorId == colorId), true, Messages.Listed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails(int id)
@@ -95,7 +96,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.Id == id), true, Messages.Listed);_carDal.GetCarDetails(c => c.Id == id);
+            return new DataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.Id == id), true, Messages.Listed);
         }
 
         public IResult Update(Car car)
