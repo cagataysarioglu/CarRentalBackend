@@ -19,7 +19,7 @@ namespace DataAccess.Concrete.InMemory
         public void Delete(Color color)
         {
             Color colorToDelete = null;
-            colorToDelete = _colors.SingleOrDefault(c => c.Id == color.Id);
+            colorToDelete = _colors.SingleOrDefault(c => c.ColorId == color.ColorId);
             _colors.Remove(colorToDelete);
         }
 
@@ -45,7 +45,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Color color)
         {
-            Color colorToUpdate = _colors.SingleOrDefault(c => c.Id == color.Id);
+            Color colorToUpdate = _colors.SingleOrDefault(c => c.ColorId == color.ColorId);
             colorToUpdate.Name = color.Name;
         }
     }

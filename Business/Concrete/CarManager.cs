@@ -34,7 +34,7 @@ namespace Business.Concrete
 
         public IResult Delete(Car car)
         {
-            if (car.Id != 0)
+            if (car.CarId != 0)
             {
                 _carDal.Delete(car);
                 return new SuccessResult(Messages.Deleted);
@@ -69,7 +69,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<Car>(Messages.MaintenanceTime);
             }
-            return new DataResult<Car>(_carDal.Get(c => c.Id == id), true, Messages.Listed);
+            return new DataResult<Car>(_carDal.Get(c => c.CarId == id), true, Messages.Listed);
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
@@ -96,7 +96,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.Id == id), true, Messages.Listed);
+            return new DataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.CarId == id), true, Messages.Listed);
         }
 
         public IResult Update(Car car)

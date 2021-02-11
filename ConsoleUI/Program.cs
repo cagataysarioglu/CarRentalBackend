@@ -11,13 +11,13 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //Splicer();
-            //Updater();
-            //Wiper();
-            DetailDisplayer();
-            //DisplayerByPrice();
-            //DisplayerByBrand();
-            //DisplayerByColor();
+            //CarAddition();
+            //CarUpdate();
+            //CarDeregistration();
+            //DisplayingCarDetails();
+            //DisplayingCarsByPrice();
+            //DisplayingCarsByBrand();
+            //DisplayingCarsByColor();
             //NonFilterListing();
 
             Console.ReadKey();
@@ -40,7 +40,7 @@ namespace ConsoleUI
             }
         }
 
-        private static void DisplayerByColor()
+        private static void DisplayingCarsByColor()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var resultFour = carManager.GetCarsByColorId(5);
@@ -57,7 +57,7 @@ namespace ConsoleUI
             }
         }
 
-        private static void DisplayerByBrand()
+        private static void DisplayingCarsByBrand()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var resultTwo = carManager.GetCarsByBrandId(1);
@@ -74,7 +74,7 @@ namespace ConsoleUI
             }
         }
 
-        private static void DisplayerByPrice()
+        private static void DisplayingCarsByPrice()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var resultFive = carManager.GetByDailyPrice(100, 600);
@@ -91,7 +91,7 @@ namespace ConsoleUI
             }
         }
 
-        private static void DetailDisplayer()
+        private static void DisplayingCarDetails()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var resultSix = carManager.GetCarDetails(2);
@@ -109,13 +109,13 @@ namespace ConsoleUI
             }
         }
 
-        private static void Wiper()
+        private static void CarDeregistration()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var resultSeven = carManager.Delete(carManager.GetById(3).Data);
         }
 
-        private static void Updater()
+        private static void CarUpdate()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             Car carToUpdate = carManager.GetById(5).Data;
@@ -123,7 +123,7 @@ namespace ConsoleUI
             var resultThree = carManager.Update(carToUpdate);
         }
 
-        private static void Splicer()
+        private static void CarAddition()
         {
             CarManager carManager = new CarManager(new EfCarDal());
 

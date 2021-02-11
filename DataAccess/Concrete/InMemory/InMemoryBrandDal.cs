@@ -19,7 +19,7 @@ namespace DataAccess.Concrete.InMemory
         public void Delete(Brand brand)
         {
             Brand brandToDelete = null;
-            brandToDelete = _brands.SingleOrDefault(c => c.Id == brand.Id);
+            brandToDelete = _brands.SingleOrDefault(c => c.BrandId == brand.BrandId);
             _brands.Remove(brandToDelete);
         }
 
@@ -45,7 +45,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Brand brand)
         {
-            Brand brandToUpdate = _brands.SingleOrDefault(c => c.Id == brand.Id);
+            Brand brandToUpdate = _brands.SingleOrDefault(c => c.BrandId == brand.BrandId);
             brandToUpdate.Name = brand.Name;
         }
     }

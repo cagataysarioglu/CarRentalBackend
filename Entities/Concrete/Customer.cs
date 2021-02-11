@@ -5,9 +5,9 @@ using Core.Entities;
 
 namespace Entities.Concrete
 {
-    public class Color : IEntity
+    public class Customer : IEntity
     {
-        public int ColorId { get; set; }
-        public string Name { get; set; }
+        public int UserId { get; set; }
+        public string CompanyName { get; set; }
     }
 }

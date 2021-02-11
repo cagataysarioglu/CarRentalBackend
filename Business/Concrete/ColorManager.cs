@@ -33,7 +33,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Color>>(_colorDal.GetAll(c => c.Id == colorId), true, Messages.Listed);
+            return new DataResult<List<Color>>(_colorDal.GetAll(c => c.ColorId == colorId), true, Messages.Listed);
         }
     }
 }

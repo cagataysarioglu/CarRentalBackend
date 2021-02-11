@@ -34,7 +34,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Brand>>(_brandDal.GetAll(c => c.Id == brandId), true, Messages.Listed);
+            return new DataResult<List<Brand>>(_brandDal.GetAll(c => c.BrandId == brandId), true, Messages.Listed);
         }
     }
 }
