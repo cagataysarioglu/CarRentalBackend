@@ -24,7 +24,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Color>>(_colorDal.GetAll(), true, Messages.Listed);_colorDal.GetAll();
+            return new DataResult<List<Color>>(_colorDal.GetAll(), true, Messages.Listed);
         }
 
         IDataResult<List<Color>> IColorService.GetById(int colorId)
@@ -33,7 +33,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Color>>(_colorDal.GetAll(c => c.Id == colorId), true, Messages.Listed);_colorDal.GetAll(c => c.Id == colorId);
+            return new DataResult<List<Color>>(_colorDal.GetAll(c => c.Id == colorId), true, Messages.Listed);
         }
     }
 }

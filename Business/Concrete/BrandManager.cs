@@ -25,7 +25,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Brand>>(_brandDal.GetAll(), true, Messages.Listed);_brandDal.GetAll();
+            return new DataResult<List<Brand>>(_brandDal.GetAll(), true, Messages.Listed);
         }
 
         IDataResult<List<Brand>> IBrandService.GetById(int brandId)
@@ -34,7 +34,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
             }
-            return new DataResult<List<Brand>>(_brandDal.GetAll(c => c.Id == brandId), true, Messages.Listed);_brandDal.GetAll(c => c.Id == brandId);
+            return new DataResult<List<Brand>>(_brandDal.GetAll(c => c.Id == brandId), true, Messages.Listed);
         }
     }
 }
