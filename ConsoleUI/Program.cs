@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Concrete;
+using Business.Constants;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -14,7 +15,7 @@ namespace ConsoleUI
             //CarAddition();
             //CarUpdate();
             //CarDeregistration();
-            DisplayingCarDetails();
+            //DisplayingCarDetails();
             //DisplayingCarsByPrice();
             //DisplayingCarsByBrand();
             //DisplayingCarsByColor();
@@ -112,7 +113,8 @@ namespace ConsoleUI
         private static void CarDeregistration()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var resultSeven = carManager.Delete(carManager.GetById(3).Data);
+            var resultSeven = carManager.Delete(carManager.GetById(1002).Data);
+            Console.WriteLine(Messages.Deleted);
         }
 
         private static void CarUpdate()
@@ -121,13 +123,14 @@ namespace ConsoleUI
             Car carToUpdate = carManager.GetById(5).Data;
             carToUpdate.DailyPrice = 725;
             var resultThree = carManager.Update(carToUpdate);
+            Console.WriteLine(Messages.Updated);
         }
 
         private static void CarAddition()
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            Car carToAdded = new Car()
+            Car carToAdd = new Car()
             {
                 BrandId = 1,
                 Name = "TOGG",
@@ -136,7 +139,8 @@ namespace ConsoleUI
                 DailyPrice = 710,
                 Description = "Best in class."
             };
-            carManager.Add(carToAdded);
+            carManager.Add(carToAdd);
+            Console.WriteLine(Messages.Added);
         }
     }
 }
