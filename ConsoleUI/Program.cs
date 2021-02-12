@@ -14,7 +14,7 @@ namespace ConsoleUI
             //CarAddition();
             //CarUpdate();
             //CarDeregistration();
-            //DisplayingCarDetails();
+            DisplayingCarDetails();
             //DisplayingCarsByPrice();
             //DisplayingCarsByBrand();
             //DisplayingCarsByColor();
@@ -131,9 +131,10 @@ namespace ConsoleUI
             {
                 BrandId = 1,
                 Name = "TOGG",
-                ColorId = 5,
+                ColorId = 2,
                 ModelYear = 2022,
-                DailyPrice = 710
+                DailyPrice = 710,
+                Description = "Best in class."
             };
             carManager.Add(carToAdded);
         }
