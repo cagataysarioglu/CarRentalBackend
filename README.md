@@ -1,2 +1,2 @@
 # Car Rental
-Car rental application with api connection consisting of special layers for transactions.
+Car rental application with API connection consisting of special layers for transactions.
