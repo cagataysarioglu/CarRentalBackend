@@ -11,18 +11,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private IRentalService _rentalService;
-        public RentalsController(IRentalService rentalService)
+        private IUserService _userService;
+        public UsersController(IUserService userService)
         {
-            _rentalService = rentalService;
+            _userService = userService;
         }
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _rentalService.GetById(id);
+            var result = _userService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -33,29 +33,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getrentalsbycustomerid")]
-        public IActionResult GetRentalsByCustomerId(int id)
-        {
-            var result = _rentalService.GetRentalsByCustomerId(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getcardetails")]
-        public IActionResult GetRentalDetails(int id)
-        {
-            var result = _rentalService.GetRentalDetails(id);
+            var result = _userService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -64,9 +42,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(Rental car)
+        public IActionResult Update(User user)
         {
-            var result = _rentalService.Update(car);
+            var result = _userService.Update(user);
             if (result.Success)
             {
                 return Ok(result);
@@ -75,9 +53,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(Rental car)
+        public IActionResult Delete(User user)
         {
-            var result = _rentalService.Delete(car);
+            var result = _userService.Delete(user);
             if (result.Success)
             {
                 return Ok(result);
@@ -86,9 +64,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Rental car)
+        public IActionResult Add(User user)
         {
-            var result = _rentalService.Add(car);
+            var result = _userService.Add(user);
             if (result.Success)
             {
                 return Ok(result);
