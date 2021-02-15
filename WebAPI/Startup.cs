@@ -38,6 +38,10 @@ namespace WebAPI
             services.AddSingleton<ICustomerDal, EfCustomerDal>();
             services.AddSingleton<IUserService, UserManager>();
             services.AddSingleton<IUserDal, EfUserDal>();
+            services.AddSingleton<IBrandService, BrandManager>();
+            services.AddSingleton<IBrandDal, EfBrandDal>();
+            services.AddSingleton<IColorService, ColorManager>();
+            services.AddSingleton<IColorDal, EfColorDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,3 +65,13 @@ namespace WebAPI
         }
     }
 }
+
+//200 - OK --> Tamam, baþarýlý
+//201 - CREATED --> Oluþturuldu
+//301 - MOVED PERMANENTLY --> Yönlendirme
+//400 - BAD REQUEST --> Sunucu istenen iþlemi tamamlayamadýðýnda karþýlaþýlan hata
+//401 - UNAUTHORIZED --> Yetkisiz
+//403 - FORBIDDEN --> Yasaklandý
+//404 - NOT FOUND --> Sayfa bulunamadý
+//500 - INTERNAL SERVER ERROR --> Beklenmedik sunucu hatasý
+//502 - BAD GATEWAY --> Ýki sunucu arasýndaki beklenmedik hata
