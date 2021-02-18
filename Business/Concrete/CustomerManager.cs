@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,30 +22,18 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
-            if (customer.UserId != 0 && customer.CompanyName.Length > 0)
-            {
-                _customerDal.Add(customer);
-                return new SuccessResult(Messages.Added);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NotAdded);
-            }
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.Added);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer)
         {
-            if (customer.UserId != 0)
-            {
-                _customerDal.Delete(customer);
-                return new SuccessResult(Messages.Deleted);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NotDeleted);
-            }
+            _customerDal.Delete(customer);
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<Customer>> GetAll()
@@ -72,6 +63,7 @@ namespace Business.Concrete
             return new DataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(c => c.UserId == id), true, Messages.Listed);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);

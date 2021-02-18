@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -20,30 +23,18 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental car)
         {
-            if (car.RentDate.DayOfYear > 0)
-            {
-                _rentalDal.Add(car);
-                return new SuccessResult(Messages.Added);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NotAdded);
-            }
+            _rentalDal.Add(car);
+            return new SuccessResult(Messages.Added);
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Delete(Rental car)
         {
-            if (car.RentalId != 0)
-            {
-                _rentalDal.Delete(car);
-                return new SuccessResult(Messages.Deleted);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NotDeleted);
-            }
+            _rentalDal.Delete(car);
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<Rental>> GetAll()
@@ -82,6 +73,7 @@ namespace Business.Concrete
             return new DataResult<List<Rental>>(_rentalDal.GetRentalsByCustomerId(c => c.CustomerId == userId), true, Messages.Listed);
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental car)
         {
             _rentalDal.Update(car);

@@ -19,7 +19,7 @@ namespace ConsoleUI
             //DisplayingCarsByPrice();
             //DisplayingCarsByBrand();
             //DisplayingCarsByColor();
-            //NonFilterListing();
+            NonFilterListing();
 
             //UserAddition();
             //ListOfAllUsers();

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -18,30 +21,19 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
+
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
-            if (user.Name.Length > 2 && user.Surname.Length > 2 && user.Password.Length > 3)
-            {
-                _userDal.Add(user);
-                return new SuccessResult(Messages.Added);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NotAdded);
-            }
+            _userDal.Add(user);
+            return new SuccessResult(Messages.Added);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Delete(User user)
         {
-            if (user.UserId != 0)
-            {
-                _userDal.Delete(user);
-                return new SuccessResult(Messages.Deleted);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NotDeleted);
-            }
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<User>> GetAll()
@@ -62,6 +54,7 @@ namespace Business.Concrete
             return new DataResult<User>(_userDal.Get(c => c.UserId == userId), true, Messages.Listed);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user)
         {
             _userDal.Update(user);
