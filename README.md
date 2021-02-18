@@ -18,7 +18,7 @@ Latest Updates
         Some bugs were fixed.
         Tested via Postman after refactoring.
 
-    16 February 2021;
+    14 February 2021;
         WebAPI layer was added.
         CRUD operations were added to WebAPI/Controllers layer.
         Detail operations have been updated.
