@@ -8,7 +8,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarImagesDal : EfEntityRepositoryBase<CarImage, DatabaseContext>, ICarImagesDal
+    public class EfCarImagesDal : EfEntityRepositoryBase<CarImage, DatabaseContext>, ICarImageDal
     {
         public List<CarImage> GetCarImagesByCarId(Func<CarImage, bool> filter = null)
         {

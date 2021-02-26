@@ -6,7 +6,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarImagesDal : IEntityRepository<CarImage>
+    public interface ICarImageDal : IEntityRepository<CarImage>
     {
         List<CarImage> GetCarImagesByCarId(Func<CarImage,bool> filter = null);
     }
