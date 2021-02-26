@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -17,14 +19,23 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         private ICarDal _carDal;
-        public CarManager(ICarDal carDal)
+        private IBrandService _brandService;
+        public CarManager(ICarDal carDal, IBrandService brandService)
         {
             _carDal = carDal;
+            _brandService = brandService;
         }
 
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+            IResult result = BusinessRules.Run(CheckIfProductNameExists(car.Name),
+                CheckIfBrandCountBoundExceeded(),
+                CheckIfCarCountOfBrandCorrect(car.CarId));
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.Added);
         }
@@ -93,8 +104,44 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
+            IResult result = BusinessRules.Run(CheckIfProductNameExists(car.Name),
+                CheckIfBrandCountBoundExceeded(),
+                CheckIfCarCountOfBrandCorrect(car.CarId));
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Update(car);
             return new SuccessResult(Messages.Updated);
+        }
+        private IResult CheckIfCarCountOfBrandCorrect(int carId)
+        {
+            var result = _carDal.GetAll(p => p.CarId == carId).Count;
+            if (result >= 10)
+            {
+                return new ErrorResult(Messages.CarCountOfBrandError);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfProductNameExists(string carName)
+        {
+            var result = _carDal.GetAll(p => p.Name == carName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.CarNameAlreadyExists);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfBrandCountBoundExceeded()
+        {
+            var result = _brandService.GetAll();
+            if (result.Data.Count > 15)
+            {
+                return new ErrorResult(Messages.BrandCountBoundExceeded);
+            }
+            return new SuccessResult();
         }
     }
 }
