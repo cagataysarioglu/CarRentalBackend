@@ -97,7 +97,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<CarImage>(exception.Message);
             }
-            return new SuccessDataResult<CarImage>(new CarImage { Id = carImage.Id, CarId = carImage.CarId, ImagePath = result, CreatedDate = DateTime.Now }, Messages.ImagesAdded);
+            return new SuccessDataResult<CarImage>(new CarImage { Id = carImage.Id, CarId = carImage.CarId, ImagePath = result, CreatedDate = DateTime.Now }, Messages.Added);
         }
 
         private IDataResult<CarImage> CheckIfUpdatedFileExists(CarImage carImage)
@@ -128,7 +128,7 @@ namespace Business.Concrete
             var result = _carImageDal.GetAll(p => p.CarId == carId).Count;
             if (result > 6)
             {
-                return new ErrorResult(Messages.FailAddedImageLimit);
+                return new ErrorResult(Messages.ImageLimitExceeded);
             }
             return new SuccessResult();
         }

@@ -16,8 +16,9 @@ namespace Business.Constants
         public static string NameInvalid = "Item name is invalid.";
         public static string DailyPriceInvalid = "Item daily price is invalid.";
         public static string MaintenanceTime = "Service is unavailable.";
-        internal static string CarCountOfBrandError;
-        internal static string CarNameAlreadyExists;
-        internal static string BrandCountBoundExceeded;
+        public static string CarCountOfBrandError = "Car count exceeded brand limit";
+        public static string CarNameAlreadyExists = "Car name already exists.";
+        public static string BrandCountBoundExceeded = "Brand count bound exceeded.";
+        public static string ImageLimitExceeded = "Reached to image limit";
     }
 }
