@@ -6,6 +6,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -51,7 +52,17 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<User>(Messages.MaintenanceTime);
             }
-            return new DataResult<User>(_userDal.Get(c => c.UserId == userId), true, Messages.Listed);
+            return new DataResult<User>(_userDal.Get(c => c.Id == userId), true, Messages.Listed);
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new DataResult<User>(_userDal.Get(u => u.Email == email), true, Messages.Listed);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new DataResult<List<OperationClaim>>(_userDal.GetClaims(user),true, Messages.Listed);
         }
 
         [ValidationAspect(typeof(UserValidator))]

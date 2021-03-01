@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -20,5 +21,6 @@ namespace Business.Constants
         public static string CarNameAlreadyExists = "Car name already exists.";
         public static string BrandCountBoundExceeded = "Brand count bound exceeded.";
         public static string ImageLimitExceeded = "Reached to image limit";
+        public static string AuthorizationDenied;
     }
 }
