@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Business.Concrete;
 using Business.Constants;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
@@ -20,7 +21,7 @@ namespace ConsoleUI
             //DisplayingCarsByPrice();
             //DisplayingCarsByBrand();
             //DisplayingCarsByColor();
-            NonFilterListing();
+            //NonFilterListing();
 
             //UserAddition();
             //ListOfAllUsers();
@@ -63,7 +64,7 @@ namespace ConsoleUI
             {
                 foreach (var user in result.Data)
                 {
-                    Console.WriteLine("User name: {0} / User surname: {1} / E-mail: {2}", user.Name, user.Surname, user.Email);
+                    Console.WriteLine("User name: {0} / User surname: {1} / E-mail: {2}", user.FirstName, user.LastName, user.Email);
                 }
             }
             else
@@ -77,10 +78,9 @@ namespace ConsoleUI
             UserManager userManager = new UserManager(new EfUserDal());
             User userToAdd = new User()
             {
-                Name = "Çağatay",
-                Surname = "Sarıoğlu",
+                FirstName = "Çağatay",
+                LastName = "Sarıoğlu",
                 Email = "cagataysarioglu@eposta.com",
-                Password = "parolalorap"
             };
             userManager.Add(userToAdd);
             Console.WriteLine(Messages.Added);

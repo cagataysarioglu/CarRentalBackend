@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -22,5 +23,12 @@ namespace Business.Constants
         public static string BrandCountBoundExceeded = "Brand count bound exceeded.";
         public static string ImageLimitExceeded = "Reached to image limit";
         public static string AuthorizationDenied;
+        internal static string AccessTokenCreated;
+        internal static string UserAlreadyExists;
+        internal static string SuccessfulLogin;
+        internal static string UserRegistered;
+        internal static User UserNotFound;
+        internal static User PasswordError;
+        internal static string CarImageLimitExceeded;
     }
 }

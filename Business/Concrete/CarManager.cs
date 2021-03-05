@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -26,6 +27,7 @@ namespace Business.Concrete
             _brandService = brandService;
         }
 
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -40,6 +42,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Added);
         }
 
+        [SecuredOperation("car.delete,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Delete(Car car)
         {
@@ -101,6 +104,7 @@ namespace Business.Concrete
             return new DataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.CarId == id), true, Messages.Listed);
         }
 
+        [SecuredOperation("car.update,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
