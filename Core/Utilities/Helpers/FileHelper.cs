@@ -12,16 +12,16 @@ namespace Core.Utilities.Helpers
     {
         public static string Add(IFormFile file)
         {
-            var sourcepath = Path.GetTempFileName();
+            var sourcePath = Path.GetTempFileName();
             if (file.Length > 0)
             {
-                using (var uploading = new FileStream(sourcepath, FileMode.Create))
+                using (var uploading = new FileStream(sourcePath, FileMode.Create))
                 {
                     file.CopyTo(uploading);
                 }
             }
             var result = newPath(file);
-            File.Move(sourcepath, result);
+            File.Move(sourcePath, result);
             return result;
         }
         public static IResult Delete(string path)
@@ -53,8 +53,8 @@ namespace Core.Utilities.Helpers
 
         public static string newPath(IFormFile file)
         {
-            FileInfo ff = new FileInfo(file.FileName);
-            string fileExtension = ff.Extension;
+            FileInfo fileInfo = new FileInfo(file.FileName);
+            string fileExtension = fileInfo.Extension;
             string path = Environment.CurrentDirectory + @"\wwwroot\Uploads";
             var newPath = Guid.NewGuid().ToString() + fileExtension;
             string result = $@"{path}\{newPath}";

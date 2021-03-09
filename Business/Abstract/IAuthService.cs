@@ -6,7 +6,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Security.JWT;
 using Entities.Concrete;
-using Entities.Dtos;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
