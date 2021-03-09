@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -29,6 +32,7 @@ namespace Business.Concrete
 
         [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfProductNameExists(car.Name),
@@ -50,6 +54,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Deleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour > 22 && DateTime.Now.Hour < 23)
@@ -68,6 +73,7 @@ namespace Business.Concrete
             return new DataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice <= max && c.DailyPrice >= min), true, Messages.Listed);
         }
 
+        [CacheAspect]
         public IDataResult<Car> GetById(int id)
         {
             if (DateTime.Now.Hour > 22 && DateTime.Now.Hour < 23)
@@ -106,6 +112,7 @@ namespace Business.Concrete
 
         [SecuredOperation("car.update,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfProductNameExists(car.Name),
@@ -146,6 +153,21 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.BrandCountBoundExceeded);
             }
             return new SuccessResult();
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Add(car);
+                if (car.DailyPrice < 1)
+                {
+                    throw new Exception("Transactional error.");
+                }
+                Add(car);
+                return null;
+            }
         }
     }
 }

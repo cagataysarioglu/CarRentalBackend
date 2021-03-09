@@ -21,14 +21,13 @@ namespace Business.Constants
         public static string CarCountOfBrandError = "Car count exceeded brand limit";
         public static string CarNameAlreadyExists = "Car name already exists.";
         public static string BrandCountBoundExceeded = "Brand count bound exceeded.";
-        public static string ImageLimitExceeded = "Reached to image limit";
-        public static string AuthorizationDenied;
-        internal static string AccessTokenCreated;
-        internal static string UserAlreadyExists;
-        internal static string SuccessfulLogin;
-        internal static string UserRegistered;
-        internal static User UserNotFound;
-        internal static User PasswordError;
-        internal static string CarImageLimitExceeded;
+        public static string AuthorizationDenied = "Authorization failed.";
+        public static string AccessTokenCreated = "Access token is created.";
+        public static string UserAlreadyExists = "User already exists.";
+        public static string SuccessfulLogin = "Successfully logged in.";
+        public static string UserRegistered = "User is registered.";
+        public static string UserNotFound = "User not found.";
+        public static string PasswordError = "Password is invalid.";
+        public static string CarImageLimitExceeded = "Reached to image limit";
     }
 }
